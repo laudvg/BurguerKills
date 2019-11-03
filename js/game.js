@@ -1,46 +1,47 @@
-class Game {
-    constructor(canvas) {
-        this.canvas = undefined,
-            this.ctx = undefined,
-            this.width = undefined,
-            this.height = undefined,
-            this.fps = 60,
-            this.framesCounter = 0
+const Game = {
+    canvas: undefined,
+    ctx: undefined,
+    width: undefined,
+    height: undefined,
+    fps: 60,
+    framesCounter: 0,
+    score: 0,
 
-    };
+    init: function() {
+        this.canvas = document.getElementById('canvas');
+        this.ctx = this.canvas.getContext('2d');
+        this.width = window.innerWidth;
+        this.height = window.innerHeight;
+        this.canvas.width = this.width;
+        this.canvas.height = this.height;
 
-    init() {
-        this.canvas = document.getElementById('canvas'),
-            this.ctx = this.canvas.getContext('2d'),
-            this.width = window.innerWidth,
-            this.height = window.innerHeight,
-            this.canvas.width = this.width,
-            this.canvas.height = this.height,
+         this.start();
+    },
 
-            this.start()
-    };
-
-    start() {
+    start: function(){
         this.reset()
         this.interval = setInterval(() => {
-            this.framesCounter++;
+            this.framesCounter = 1;
+
+            this.clear();
+            this.drawAll();
+
 
         }, 1000 / this.fps)
-    };
+    },
 
-    reset() {
-        this.background = new Background(this.image, this.posX, this.posY, this.width, this.height);
-    };
+    reset: function() {
+        this.background = new Background(this.ctx, this.width, this.height);
+    },
 
-    clear() {
+    clear: function() {
         this.ctx.clearRect(0, 0, this.width, this.height)
-    };
+    },
 
-    drawAll() {
+    drawAll: function() {
         this.background.draw();
-    };
-
-    
+    },
 
 
 }
+
