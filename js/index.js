@@ -1,4 +1,4 @@
-window.onload = function() {
-    Game.init()
-  }
-  
+window.onload = function () {
+    let game = new Game();
+    
+}
