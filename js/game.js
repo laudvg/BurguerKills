@@ -6,6 +6,10 @@ const Game = {
     fps: 60,
     framesCounter: 0,
     score: 0,
+    playerKeys: {
+        TOP_KEY: 38,
+        DOWN_KEY: 40
+      },
 
     init: function() {
         this.canvas = document.getElementById('canvas');
@@ -21,7 +25,7 @@ const Game = {
     start: function(){
         this.reset()
         this.interval = setInterval(() => {
-            this.framesCounter = 1;
+            this.framesCounter += 1
 
             this.clear();
             this.drawAll();
@@ -32,6 +36,7 @@ const Game = {
 
     reset: function() {
         this.background = new Background(this.ctx, this.width, this.height);
+        this.player = new Player(this.ctx, 300, 150, this.playerKeys);
     },
 
     clear: function() {
@@ -41,6 +46,7 @@ const Game = {
     drawAll: function() {
         this.background.draw();
         this.background.move();
+        this.player.draw(this.framesCounter);
     },
 
 
