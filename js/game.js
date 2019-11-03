@@ -36,7 +36,7 @@ const Game = {
 
     reset: function() {
         this.background = new Background(this.ctx, this.width, this.height);
-        this.player = new Player(this.ctx, 300, 150, this.playerKeys);
+        this.player = new Player(this.ctx, 300, 150, this.width, this.height, this.playerKeys);
     },
 
     clear: function() {
@@ -45,10 +45,12 @@ const Game = {
 
     drawAll: function() {
         this.background.draw();
-        this.background.move();
         this.player.draw(this.framesCounter);
     },
 
-
+    moveAll: function(){
+        this.player.move();
+        this.background.move();
+    }
 }
 
