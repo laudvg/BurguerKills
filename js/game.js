@@ -40,6 +40,7 @@ const Game = {
 
     drawAll: function() {
         this.background.draw();
+        this.background.move();
     },
 
 
