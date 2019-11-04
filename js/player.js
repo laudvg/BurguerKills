@@ -17,9 +17,9 @@ class Player {
         this.framesIndex = 0;
 
         this.keyState = {
-            keyDown : false,
-            keyUp : false
-          }
+            keyDown: false,
+            keyUp: false
+        }
     };
 
     draw(framesCounter) {
@@ -44,15 +44,12 @@ class Player {
         }
     }
 
-    move(){
-        console.log("hola")
-        if(this.keyState.keyDown && this.posY < 450){
-            this.posY +=5;
-        } else if (this.keyState.keyUp && this.posY > 75){
-     
-            this.posY -=5;
+    move() {
+        if (this.keyState.keyDown && this.posY < 450) {
+            this.posY += 5;
+        } else if (this.keyState.keyUp && this.posY > 75) {
+            this.posY -= 5;
         }
-        
     }
 
     setListeners() {
@@ -64,8 +61,8 @@ class Player {
             if (e.keyCode === 40) {
                 this.keyState.keyDown = true;
             }
-          });
-          document.addEventListener('keyup', (e) => {
+        });
+        document.addEventListener('keyup', (e) => {
             e.preventDefault();
             if (e.keyCode === 38) {
                 this.keyState.keyUp = false;
@@ -73,6 +70,6 @@ class Player {
             if (e.keyCode === 40) {
                 this.keyState.keyDown = false;
             }
-          });
+        });
     }
 }
