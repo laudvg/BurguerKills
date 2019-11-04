@@ -5,7 +5,7 @@ class Obstacles {
       this.height = height;
   
       this.posX = gameWidth;
-      this.posY = gameHeight/2;
+      this.posY = Math.floor((Math.random() * 450) + 75);
       this.image = new Image();
       this.image.src = "./img/healthy/apple.png";
       this.vx = 10;

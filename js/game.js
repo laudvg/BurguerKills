@@ -9,9 +9,9 @@ const Game = {
     playerKeys: {
         keyUp: 38,
         keyDown: 40
-      },
+    },
 
-    init: function() {
+    init: function () {
         this.canvas = document.getElementById('canvas');
         this.ctx = this.canvas.getContext('2d');
         this.width = window.innerWidth;
@@ -22,32 +22,32 @@ const Game = {
         this.start();
     },
 
-    start: function(){
+    start: function () {
         this.reset()
         this.interval = setInterval(() => {
-            this.framesCounter ++;
+            this.framesCounter++;
             this.clear();
             this.drawAll();
             this.moveAll();
-            if(this.framesCounter % 70 === 0) this.generateObstacles();
-            if(this.framesCounter % 80 === 0) this.generatePrices();
+            if (this.framesCounter % 70 === 0) this.generateObstacles();
+            if (this.framesCounter % 80 === 0) this.generatePrices();
 
         }, 1000 / this.fps)
     },
 
-    reset: function() {
+    reset: function () {
         this.background = new Background(this.ctx, this.width, this.height);
-        this.player = new Player(this.ctx, 180, 160, this.width, this.height);
+        this.player = new Player(this.ctx, 180, 175, this.width, this.height);
         this.player.setListeners();
         this.obstacles = [];
         this.prices = [];
     },
 
-    clear: function() {
+    clear: function () {
         this.ctx.clearRect(0, 0, this.width, this.height)
     },
 
-    drawAll: function() {
+    drawAll: function () {
         this.background.draw();
         this.player.draw(this.framesCounter);
         this.player.draw();
@@ -56,7 +56,7 @@ const Game = {
 
     },
 
-    moveAll: function(){
+    moveAll: function () {
         this.background.move();
         this.player.move();
         console.log(this.obstacles)
@@ -64,14 +64,14 @@ const Game = {
         this.prices.forEach(prices => prices.move())
     },
 
-    generateObstacles: function() {
+    generateObstacles: function () {
         this.obstacles.push(new Obstacles(this.ctx, 40, 45, this.width, this.height));
-      },
+    },
 
-    
-      generatePrices: function() {
+
+    generatePrices: function () {
         this.obstacles.push(new Prices(this.ctx, 70, 45, this.width, this.height));
-      },
-    
-    
+    },
+
+
 }

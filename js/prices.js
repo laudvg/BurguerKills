@@ -5,7 +5,7 @@ class Prices {
       this.height = height;
   
       this.posX = gameWidth;
-      this.posY = gameHeight/1.5;
+      this.posY = Math.floor((Math.random() * 450) + 75);
       this.image = new Image();
       this.image.src = "./img/fat/donut.png";
       this.vx = 10;
