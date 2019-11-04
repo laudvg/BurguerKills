@@ -30,6 +30,7 @@ const Game = {
             this.drawAll();
             this.moveAll();
             if(this.framesCounter % 70 === 0) this.generateObstacles();
+            if(this.framesCounter % 80 === 0) this.generatePrices();
 
         }, 1000 / this.fps)
     },
@@ -39,7 +40,7 @@ const Game = {
         this.player = new Player(this.ctx, 180, 160, this.width, this.height);
         this.player.setListeners();
         this.obstacles = [];
-
+        this.prices = [];
     },
 
     clear: function() {
@@ -51,6 +52,8 @@ const Game = {
         this.player.draw(this.framesCounter);
         this.player.draw();
         this.obstacles.forEach(obstacles => obstacles.draw())
+        this.prices.forEach(prices => prices.draw())
+
     },
 
     moveAll: function(){
@@ -58,12 +61,17 @@ const Game = {
         this.player.move();
         console.log(this.obstacles)
         this.obstacles.forEach(obstacles => obstacles.move())
+        this.prices.forEach(prices => prices.move())
     },
 
     generateObstacles: function() {
-        this.obstacles.push(new Obstacles(this.ctx, 40, 45, this.width, this.height))
+        this.obstacles.push(new Obstacles(this.ctx, 40, 45, this.width, this.height));
       },
 
+    
+      generatePrices: function() {
+        this.obstacles.push(new Prices(this.ctx, 70, 45, this.width, this.height));
+      },
     
     
 }
