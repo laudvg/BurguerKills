@@ -1,5 +1,5 @@
 class Player {
-    constructor(ctx, width, height, gameWidth, gameHeight, keys) {
+    constructor(ctx, width, height, gameWidth, gameHeight) {
         this.ctx = ctx;
         this.width = width;
         this.height = height;
@@ -9,22 +9,23 @@ class Player {
 
 
         this.posX = 100;
-        this.posY = 200;
+        this.posY = 350;
         this.gameWidth = gameWidth;
         this.gameHeight = gameHeight;
-        this.gameBorderTop = gameHeight * 0.15;
-        this.gameBorderDown = gameHeight * 0.85;
-        this.frames = 1;
-        this.framesIndex = 1;
-        this.keys = keys;
 
-        this.vy = 1;
+        this.frames = 3;
+        this.framesIndex = 0;
+
+        this.keyState = {
+            keyDown : false,
+            keyUp : false
+          }
     };
 
     draw(framesCounter) {
         this.ctx.drawImage(
             this.image,
-            Math.floor(this.framesIndex * this.width / this.frames),
+            this.framesIndex * Math.floor(this.image.width / this.frames),
             0,
             Math.floor(this.image.width / this.frames),
             this.image.height,
@@ -37,35 +38,41 @@ class Player {
     }
 
     animate(framesCounter) {
-        if (framesCounter % 10 === 0) {
+        if (framesCounter % 12 === 0) {
             this.framesIndex++;
             if (this.framesIndex > 2) this.framesIndex = 0;
         }
     }
 
     move(){
-        if(this.posY >= this.gameBorderTop && this.posY < this.gameBorderDown){
-            this.posX +=10;
-        } else if (this.posY >= this.gameBorderDown && this.posY < this.gameBorderTop){
-            this.posY -=10;
+        console.log("hola")
+        if(this.keyState.keyDown && this.posY < 450){
+            this.posY +=5;
+        } else if (this.keyState.keyUp && this.posY > 75){
+     
+            this.posY -=5;
         }
+        
     }
 
-    // setListeners() {
-    //     document.addEventListener('keypress', (e) => {
-    //         switch (e.keyCode) {
-    //             case this.keys.DOWN_KEY:
-    //                 if (this.posY >= this.gameBorderTop && this.posY < this.gameBorderDown) {
-    //                     this.posY += 10;
-    //                 }
-    //                 break;
-
-    //             case this.keys.TOP_KEY:
-    //                 if (this.posY >= this.gameBorderDown && this.posY < this.gameBorderTop) {
-    //                     this.posY -= 10;
-    //                 }
-    //                 break;
-    //         }
-    //     })
-    // }
+    setListeners() {
+        document.addEventListener('keydown', (e) => {
+            e.preventDefault();
+            if (e.keyCode === 38) {
+                this.keyState.keyUp = true;
+            }
+            if (e.keyCode === 40) {
+                this.keyState.keyDown = true;
+            }
+          });
+          document.addEventListener('keyup', (e) => {
+            e.preventDefault();
+            if (e.keyCode === 38) {
+                this.keyState.keyUp = false;
+            }
+            if (e.keyCode === 40) {
+                this.keyState.keyDown = false;
+            }
+          });
+    }
 }

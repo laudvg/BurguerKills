@@ -7,8 +7,8 @@ const Game = {
     framesCounter: 0,
     score: 0,
     playerKeys: {
-        TOP_KEY: 38,
-        DOWN_KEY: 40
+        keyUp: 38,
+        keyDown: 40
       },
 
     init: function() {
@@ -19,24 +19,24 @@ const Game = {
         this.canvas.width = this.width;
         this.canvas.height = this.height;
 
-         this.start();
+        this.start();
     },
 
     start: function(){
         this.reset()
         this.interval = setInterval(() => {
             this.framesCounter += 1
-
             this.clear();
             this.drawAll();
-
+            this.moveAll();
 
         }, 1000 / this.fps)
     },
 
     reset: function() {
         this.background = new Background(this.ctx, this.width, this.height);
-        this.player = new Player(this.ctx, 300, 150, this.width, this.height, this.playerKeys);
+        this.player = new Player(this.ctx, 180, 160, this.width, this.height);
+        this.player.setListeners();
     },
 
     clear: function() {
@@ -49,8 +49,8 @@ const Game = {
     },
 
     moveAll: function(){
-        this.player.move();
         this.background.move();
+        this.player.move();
     }
 }
 
