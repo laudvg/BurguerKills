@@ -3,8 +3,8 @@ const Game = {
     ctx: undefined,
     width: undefined,
     height: undefined,
-    minBurguerSizeX: 180,
-    maxBurguerSizeX: 375,
+    minBurguerSizeX: 175,
+    maxBurguerSizeX: 300,
     fps: 60,
     framesCounter: 0,
     score: 0,
@@ -31,13 +31,16 @@ const Game = {
             this.clear();
             this.drawAll();
             this.moveAll();
-            if (this.framesCounter % 90 === 0) this.generateObstacles();
-            if (this.framesCounter % 95 === 0) this.generatePrizes();
+            if (this.framesCounter * .25 % Math.floor((Math.random() * 100) + 20) === 0) this.generateObstacles();
+            if (this.framesCounter * .25 % Math.floor((Math.random() * 100) + 20) === 0) this.generatePrizes();
             this.clearObstacles();
             this.clearPrizes();
             this.isCollisionObs();
             this.isCollisionPrize();
-
+            //this.cleanEatenFood();
+            if (this.isCollisionObs()) this.obstacles.shift();
+            if (this.isCollisionPrize()) this.obstacles.shift();
+            if(this.framesCounter % 100 === 0) this.score++;
         }, 1000 / this.fps)
     },
 
@@ -45,12 +48,11 @@ const Game = {
         this.background = new Background(this.ctx, this.width, this.height);
         this.player = new Player(this.ctx, 180, 175, this.width, this.height);
         this.player.setListeners();
+        Score.init(this.ctx, this.score);
 
         this.obstacles = [];
-        if (this.isCollisionObs()) this.obstacles.shift();
-
         this.prizes = [];
-        if (this.isCollisionPrize()) this.obstacles.shift()
+
     },
 
     clear: function () {
@@ -63,6 +65,7 @@ const Game = {
         this.player.draw();
         this.obstacles.forEach(obstacles => obstacles.draw())
         this.prizes.forEach(prizes => prizes.draw())
+        Score.draw(this.score);
 
     },
 
@@ -94,16 +97,16 @@ const Game = {
                     obstacle.posY < this.player.posY + this.player.height &&
                     obstacle.posY + obstacle.height > this.player.posY)) {
                 this.goSmallBurguer()
+            } else if (this.minBurguerSizeX > this.player.width) {
+                this.gameOver();
+                alert("FRED IS ON A DIET NOW");
             }
-            // else if (this.minBurguerSizeX > this.player.width) {
-            //     alert("FRED IS ON A DIET NOW");
-            // }
         })
     },
 
     goBigBurguer: function () {
-        this.player.width *= 1.01;
-        this.player.height *= 1.01;
+        this.player.width *= 1.005;
+        this.player.height *= 1.005;
     },
 
     isCollisionPrize: function () {
@@ -113,18 +116,33 @@ const Game = {
                     prize.posY < this.player.posY + this.player.height &&
                     prize.posY + prize.height > this.player.posY)) {
                 this.goBigBurguer();
+            } else if (this.maxBurguerSizeY <= this.player.height) {
+                this.gameOver();
+                alert("FRED IS DEAD");
             }
-            // else if (this.maxBurguerSizeY <= this.player.height) {
-            //     alert("FRED IS DEAD");
-            // }
         })
     },
 
     clearObstacles() {
-        this.obstacles = this.obstacles.filter(obstacle => obstacle.posX > 0);
+        this.obstacles = this.obstacles.filter(obstacle => obstacle.posX > 100);
     },
 
     clearPrizes() {
-        this.prizes = this.prizes.filter(prize => prize.posX > 0);
+        this.prizes = this.prizes.filter(prize => prize.posX > 100);
     },
+
+    // cleanEatenFood: function () {
+    //     if (this.isCollisionObs()) {
+    //         this.obstacles.shift();
+    //     } else if (this.isCollisionPrize()) {
+    //         this.obstacles.shift();
+    //     };
+    // },
+
+    gameOver: function () {
+        clearInterval(this.interval)
+    }
+
+    
+
 }
