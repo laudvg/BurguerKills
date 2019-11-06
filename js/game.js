@@ -4,14 +4,15 @@ const Game = {
     width: undefined,
     height: undefined,
     minBurguerSizeX: 175,
-    maxBurguerSizeX: 300,
+    maxBurguerSizeX: 550,
     fps: 60,
     framesCounter: 0,
     score: 0,
     playerKeys: {
         keyUp: 38,
-        keyDown: 40
+        keyDown: 40,
     },
+    obstacleGen: 0,
 
     init: function () {
         this.canvas = document.getElementById('canvas');
@@ -73,18 +74,39 @@ const Game = {
         this.prizes.forEach(prizes => prizes.move())
     },
 
-    generateObstacles: function () {
-        this.obstacles.push(new Obstacles(this.ctx, 40, 45, this.width, this.height));
+    generateRandom: function(){
+        this.obstacleGen = Math.floor((Math.random() * 5) + 1)
+        console.log(this.obstacleGen);
     },
 
+    generateObstacles: function () {
+        this.generateRandom();
+        
+        if (this.obstacleGen === 1) {
+            this.obstacles.push(new Obstacles(this.ctx, 40, 45, this.width, this.height, "./img/healthy/apple.png"));
+            console.log("you")
+        } else if (this.obstacleGen === 2) {
+            this.obstacles.push(new Obstacles(this.ctx, 40, 45, this.width, this.height, "./img/healthy/berenjena.png"));
+            console.log("you2")
+        } else if (this.obstacleGen === 3) {
+            this.obstacles.push(new Obstacles(this.ctx, 40, 45, this.width, this.height, "./img/healthy/carrot.png"));
+            console.log("you3")
+        } else if (this.obstacleGen === 4) {
+            this.obstacles.push(new Obstacles(this.ctx, 100, 45, this.width, this.height, "./img/healthy/patilla.png"));
+            console.log("you4")
+        } else if (this.obstacleGen === 5) {
+            this.obstacles.push(new Obstacles(this.ctx, 60, 45, this.width, this.height, "./img/healthy/kiwi.png"));
+            console.log("you5")
+        }
+    },
 
     generatePrizes: function () {
         this.prizes.push(new Prizes(this.ctx, 70, 45, this.width, this.height));
     },
 
     goSmallBurguer: function () {
-        this.player.width *= 0.1
-        this.player.height *= 0.1
+        this.player.width *= 0.9
+        this.player.height *= 0.9
     },
 
     isCollisionObs: function () {
@@ -93,13 +115,13 @@ const Game = {
                     this.player.posX < obstacle.posX + obstacle.width / 2 &&
                     obstacle.posY < this.player.posY + this.player.height / 2 &&
                     obstacle.posY + obstacle.height / 2 > this.player.posY)) {
-
                 let index = this.obstacles.indexOf(obstacle);
                 if (index > -1) {
                     this.obstacles.splice(index, 1);
                 }
                 this.goSmallBurguer()
             } else if (this.minBurguerSizeX > this.player.width) {
+                console.log(this.minBurguerSizeX, this.player.width);
                 this.gameOver();
                 alert("FRED IS ON A DIET NOW");
             }
@@ -126,7 +148,7 @@ const Game = {
                 }
 
                 this.goBigBurguer();
-            } else if (this.maxBurguerSizeY <= this.player.height) {
+            } else if (this.maxBurguerSizeX <= this.player.height) {
                 this.gameOver();
                 alert("FRED IS DEAD");
             }

@@ -61,6 +61,7 @@ class Player {
             if (e.keyCode === 40) {
                 this.keyState.keyDown = true;
             }
+
         });
         document.addEventListener('keyup', (e) => {
             e.preventDefault();
@@ -71,5 +72,6 @@ class Player {
                 this.keyState.keyDown = false;
             }
         });
+
     }
 }
