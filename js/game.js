@@ -13,6 +13,7 @@ const Game = {
         keyDown: 40,
     },
     obstacleGen: 0,
+    prizeGen: 0,
 
     init: function () {
         this.canvas = document.getElementById('canvas');
@@ -74,34 +75,54 @@ const Game = {
         this.prizes.forEach(prizes => prizes.move())
     },
 
-    generateRandom: function(){
-        this.obstacleGen = Math.floor((Math.random() * 5) + 1)
-        console.log(this.obstacleGen);
+    generateRandom: function () {
+        this.obstacleGen = Math.floor((Math.random() * 5) + 1);
     },
 
     generateObstacles: function () {
         this.generateRandom();
-        
+
         if (this.obstacleGen === 1) {
             this.obstacles.push(new Obstacles(this.ctx, 40, 45, this.width, this.height, "./img/healthy/apple.png"));
-            console.log("you")
+
         } else if (this.obstacleGen === 2) {
             this.obstacles.push(new Obstacles(this.ctx, 40, 45, this.width, this.height, "./img/healthy/berenjena.png"));
-            console.log("you2")
+
         } else if (this.obstacleGen === 3) {
             this.obstacles.push(new Obstacles(this.ctx, 40, 45, this.width, this.height, "./img/healthy/carrot.png"));
-            console.log("you3")
+
         } else if (this.obstacleGen === 4) {
             this.obstacles.push(new Obstacles(this.ctx, 100, 45, this.width, this.height, "./img/healthy/patilla.png"));
-            console.log("you4")
+
         } else if (this.obstacleGen === 5) {
             this.obstacles.push(new Obstacles(this.ctx, 60, 45, this.width, this.height, "./img/healthy/kiwi.png"));
-            console.log("you5")
+
         }
     },
 
+    generateRandomP: function () {
+        this.prizeGen = Math.floor((Math.random() * 5) + 1);
+    },
+
     generatePrizes: function () {
-        this.prizes.push(new Prizes(this.ctx, 70, 45, this.width, this.height));
+        this.generateRandomP();
+
+        if (this.prizeGen === 1) {
+            this.prizes.push(new Prizes(this.ctx, 70, 45, this.width, this.height, "./img/fat/taco.png"));
+
+        } else if (this.prizeGen === 2) {
+            this.prizes.push(new Prizes(this.ctx, 60, 45, this.width, this.height, "./img/fat/donut.png"));
+
+        } else if (this.prizeGen === 3) {
+            this.prizes.push(new Prizes(this.ctx, 40, 45, this.width, this.height, "./img/fat/icecream.png"));
+
+        } else if (this.prizeGen === 4) {
+            this.prizes.push(new Prizes(this.ctx, 45, 45, this.width, this.height, "./img/fat/cola.png"));
+
+        } else if (this.prizeGen === 5) {
+            this.prizes.push(new Prizes(this.ctx, 40, 50, this.width, this.height, "./img/fat/potatoes.png"));
+
+        }
     },
 
     goSmallBurguer: function () {
@@ -127,8 +148,6 @@ const Game = {
             }
         })
     },
-
-
 
     goBigBurguer: function () {
         this.player.width *= 1.1;

@@ -1,14 +1,14 @@
 class Prizes {
-    constructor(ctx, width, height, gameWidth, gameHeight) {
+    constructor(ctx, width, height, gameWidth, gameHeight, image) {
       this.ctx = ctx;
       this.width = width;
       this.height = height;
-      this.posX = gameWidth;
-      this.posY = Math.floor((Math.random() * 450) + 75);
-
-      this.image = new Image();
-      this.image.src = "./img/fat/donut.png";
       
+      this.posX = gameWidth;
+      this.posY = gameHeight;
+      this.posY = Math.floor((Math.random() * 450) + 75);
+      this.image = new Image();
+      this.image.src = image ;
       this.vx = 10;
     };
   
