@@ -37,10 +37,7 @@ const Game = {
             this.clearPrizes();
             this.isCollisionObs();
             this.isCollisionPrize();
-            //this.cleanEatenFood();
-            if (this.isCollisionObs()) this.obstacles.shift();
-            if (this.isCollisionPrize()) this.obstacles.shift();
-            if(this.framesCounter % 100 === 0) this.score++;
+            if (this.framesCounter % 100 === 0) this.score++;
         }, 1000 / this.fps)
     },
 
@@ -86,16 +83,21 @@ const Game = {
     },
 
     goSmallBurguer: function () {
-        this.player.width *= 0.99
-        this.player.height *= 0.99
+        this.player.width *= 0.1
+        this.player.height *= 0.1
     },
 
     isCollisionObs: function () {
         this.obstacles.forEach(obstacle => {
-            if ((this.player.posX + this.player.width > obstacle.posX &&
-                    this.player.posX < obstacle.posX + obstacle.width &&
-                    obstacle.posY < this.player.posY + this.player.height &&
-                    obstacle.posY + obstacle.height > this.player.posY)) {
+            if ((this.player.posX + this.player.width / 2 > obstacle.posX &&
+                    this.player.posX < obstacle.posX + obstacle.width / 2 &&
+                    obstacle.posY < this.player.posY + this.player.height / 2 &&
+                    obstacle.posY + obstacle.height / 2 > this.player.posY)) {
+
+                let index = this.obstacles.indexOf(obstacle);
+                if (index > -1) {
+                    this.obstacles.splice(index, 1);
+                }
                 this.goSmallBurguer()
             } else if (this.minBurguerSizeX > this.player.width) {
                 this.gameOver();
@@ -104,17 +106,25 @@ const Game = {
         })
     },
 
+
+
     goBigBurguer: function () {
-        this.player.width *= 1.005;
-        this.player.height *= 1.005;
+        this.player.width *= 1.1;
+        this.player.height *= 1.1;
     },
 
     isCollisionPrize: function () {
         this.prizes.forEach(prize => {
-            if ((this.player.posX + this.player.width > prize.posX &&
-                    this.player.posX < prize.posX + prize.width &&
-                    prize.posY < this.player.posY + this.player.height &&
-                    prize.posY + prize.height > this.player.posY)) {
+            if ((this.player.posX + this.player.width / 2 > prize.posX &&
+                    this.player.posX < prize.posX + prize.width / 2 &&
+                    prize.posY < this.player.posY + this.player.height / 2 &&
+                    prize.posY + prize.height / 2 > this.player.posY)) {
+
+                let index = this.prizes.indexOf(prize);
+                if (index > -1) {
+                    this.prizes.splice(index, 1);
+                }
+
                 this.goBigBurguer();
             } else if (this.maxBurguerSizeY <= this.player.height) {
                 this.gameOver();
@@ -124,25 +134,17 @@ const Game = {
     },
 
     clearObstacles() {
-        this.obstacles = this.obstacles.filter(obstacle => obstacle.posX > 100);
+        this.obstacles = this.obstacles.filter(obstacle => obstacle.posX > 80);
     },
 
     clearPrizes() {
-        this.prizes = this.prizes.filter(prize => prize.posX > 100);
+        this.prizes = this.prizes.filter(prize => prize.posX > 80);
     },
-
-    // cleanEatenFood: function () {
-    //     if (this.isCollisionObs()) {
-    //         this.obstacles.shift();
-    //     } else if (this.isCollisionPrize()) {
-    //         this.obstacles.shift();
-    //     };
-    // },
 
     gameOver: function () {
         clearInterval(this.interval)
     }
 
-    
+
 
 }
