@@ -22,7 +22,8 @@ const Game = {
         this.height = window.innerHeight;
         this.canvas.width = this.width;
         this.canvas.height = this.height;
-
+        // this.canvas.setAttribute("width" , this.width);
+        // this.canvas.setAttribute("height" , this.height);
         this.start();
     },
 
@@ -83,19 +84,19 @@ const Game = {
         this.generateRandom();
 
         if (this.obstacleGen === 1) {
-            this.obstacles.push(new Obstacles(this.ctx, 40, 45, this.width, this.height, "./img/healthy/apple.png"));
+            this.obstacles.push(new Obstacles(this.ctx, 40, 45, this.width, this.height, "./img/healthy/apple.png", 12));
 
         } else if (this.obstacleGen === 2) {
-            this.obstacles.push(new Obstacles(this.ctx, 40, 45, this.width, this.height, "./img/healthy/berenjena.png"));
+            this.obstacles.push(new Obstacles(this.ctx, 40, 45, this.width, this.height, "./img/healthy/berenjena.png",15));
 
         } else if (this.obstacleGen === 3) {
-            this.obstacles.push(new Obstacles(this.ctx, 40, 45, this.width, this.height, "./img/healthy/carrot.png"));
+            this.obstacles.push(new Obstacles(this.ctx, 40, 45, this.width, this.height, "./img/healthy/carrot.png",20));
 
         } else if (this.obstacleGen === 4) {
-            this.obstacles.push(new Obstacles(this.ctx, 100, 45, this.width, this.height, "./img/healthy/patilla.png"));
+            this.obstacles.push(new Obstacles(this.ctx, 100, 45, this.width, this.height, "./img/healthy/patilla.png",10));
 
         } else if (this.obstacleGen === 5) {
-            this.obstacles.push(new Obstacles(this.ctx, 60, 45, this.width, this.height, "./img/healthy/kiwi.png"));
+            this.obstacles.push(new Obstacles(this.ctx, 60, 45, this.width, this.height, "./img/healthy/kiwi.png",10));
 
         }
     },
@@ -108,19 +109,19 @@ const Game = {
         this.generateRandomP();
 
         if (this.prizeGen === 1) {
-            this.prizes.push(new Prizes(this.ctx, 70, 45, this.width, this.height, "./img/fat/taco.png"));
+            this.prizes.push(new Prizes(this.ctx, 70, 45, this.width, this.height, "./img/fat/taco.png",10));
 
         } else if (this.prizeGen === 2) {
-            this.prizes.push(new Prizes(this.ctx, 60, 45, this.width, this.height, "./img/fat/donut.png"));
+            this.prizes.push(new Prizes(this.ctx, 60, 45, this.width, this.height, "./img/fat/donut.png",25));
 
         } else if (this.prizeGen === 3) {
-            this.prizes.push(new Prizes(this.ctx, 40, 45, this.width, this.height, "./img/fat/icecream.png"));
+            this.prizes.push(new Prizes(this.ctx, 40, 45, this.width, this.height, "./img/fat/icecream.png",10));
 
         } else if (this.prizeGen === 4) {
-            this.prizes.push(new Prizes(this.ctx, 45, 45, this.width, this.height, "./img/fat/cola.png"));
+            this.prizes.push(new Prizes(this.ctx, 45, 45, this.width, this.height, "./img/fat/cola.png",20));
 
         } else if (this.prizeGen === 5) {
-            this.prizes.push(new Prizes(this.ctx, 40, 50, this.width, this.height, "./img/fat/potatoes.png"));
+            this.prizes.push(new Prizes(this.ctx, 40, 50, this.width, this.height, "./img/fat/potatoes.png",12));
 
         }
     },

@@ -1,8 +1,84 @@
-html, body {
-    margin: 0;
-    padding: 100;
-  }
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+}
 
-  #canvas {
-    background: gray;
-  }
+
+#canvas{
+  display: none;
+}
+
+#intro {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  width: 100vw;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  align-content: center;
+  background-image: url('../img/intro/fgportada.png');
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #110013;
+
+}
+
+.background {
+  width: 80%;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  margin: 0;
+  margin-left: 150px;
+}
+
+
+button {
+  transition: all 0.2s;
+  opacity: 100%;
+  background: url("../img/intro/buttonimage.png");
+  background-color: transparent;
+  background-repeat: no-repeat; 
+  background-position: 0px 0px; 
+  height: 3px;        
+  vertical-align: middle;
+  height: 88px;
+  width: 198px;
+  margin-bottom: 48px;
+  cursor: pointer;
+  border: 0;
+  outline: 0;
+}
+
+button:hover {
+  color: #000000;
+  background-color: #150017;
+  opacity: 50%;
+} 
+
+#instructions {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  align-content: center;
+  background-image: url('../img/intro/fgintro.png');
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #150017;
+
+}
