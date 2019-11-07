@@ -14,6 +14,8 @@ const Game = {
     },
     obstacleGen: 0,
     prizeGen: 0,
+    mySound: new Audio('./sound/WhatsAppAudio2019-11-06at110031P.mp3'),
+
 
     init: function () {
         this.canvas = document.getElementById('canvas');
@@ -22,7 +24,6 @@ const Game = {
         this.height = window.innerHeight;
         this.canvas.width = this.width;
         this.canvas.height = this.height;
-        // this.sound = new Sound()
         this.start();
     },
 
@@ -40,6 +41,8 @@ const Game = {
             this.isCollisionObs();
             this.isCollisionPrize();
             if (this.framesCounter % 100 === 0) this.score++;
+            this.mySound.play();
+            this.mySound.loop= true;
         }, 1000 / this.fps)
         
     },
@@ -51,6 +54,7 @@ const Game = {
         Score.init(this.ctx, this.score);
         this.obstacles = [];
         this.prizes = [];
+
 
     },
 
@@ -126,8 +130,8 @@ const Game = {
     },
 
     goSmallBurguer: function () {
-        this.player.width *= 0.9
-        this.player.height *= 0.9
+        this.player.width *= 0.9;
+        this.player.height *= 0.9;
     },
 
     isCollisionObs: function () {
@@ -143,6 +147,7 @@ const Game = {
                 this.goSmallBurguer()
             } else if (this.minBurguerSizeX > this.player.width) {
                 this.gameOver();
+                this.mySound.pause();
             }
         })
     },
@@ -167,7 +172,7 @@ const Game = {
                 this.goBigBurguer();
             } else if (this.maxBurguerSizeX <= this.player.height) {
                 this.winGame();
-
+                this.mySound.pause();
             }
         })
     },
@@ -184,14 +189,14 @@ const Game = {
       
         document.querySelector("#canvas").style.display="none";
         document.querySelector("#gameOver").style.display ="block";
-        clearInterval(this.interval)
+        clearInterval(this.interval);
     },
 
     winGame: function () {
       
         document.querySelector("#canvas").style.display="none";
         document.querySelector("#winGame").style.display ="block";
-        clearInterval(this.interval)
+        clearInterval(this.interval);
     },
 
     
