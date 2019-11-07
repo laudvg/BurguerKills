@@ -22,8 +22,7 @@ const Game = {
         this.height = window.innerHeight;
         this.canvas.width = this.width;
         this.canvas.height = this.height;
-        // this.canvas.setAttribute("width" , this.width);
-        // this.canvas.setAttribute("height" , this.height);
+        // this.sound = new Sound()
         this.start();
     },
 
@@ -34,14 +33,15 @@ const Game = {
             this.clear();
             this.drawAll();
             this.moveAll();
-            if (this.framesCounter * .25 % Math.floor((Math.random() * 100) + 20) === 0) this.generateObstacles();
-            if (this.framesCounter * .25 % Math.floor((Math.random() * 100) + 20) === 0) this.generatePrizes();
+            if (this.framesCounter * .20 % Math.floor((Math.random() * 100) + 10) === 0) this.generateObstacles();
+            if (this.framesCounter * .20 % Math.floor((Math.random() * 100) + 10) === 0) this.generatePrizes();
             this.clearObstacles();
             this.clearPrizes();
             this.isCollisionObs();
             this.isCollisionPrize();
             if (this.framesCounter % 100 === 0) this.score++;
         }, 1000 / this.fps)
+        
     },
 
     reset: function () {
@@ -49,7 +49,6 @@ const Game = {
         this.player = new Player(this.ctx, 180, 175, this.width, this.height);
         this.player.setListeners();
         Score.init(this.ctx, this.score);
-
         this.obstacles = [];
         this.prizes = [];
 
@@ -143,9 +142,7 @@ const Game = {
                 }
                 this.goSmallBurguer()
             } else if (this.minBurguerSizeX > this.player.width) {
-                console.log(this.minBurguerSizeX, this.player.width);
                 this.gameOver();
-                alert("FRED IS ON A DIET NOW");
             }
         })
     },
@@ -169,8 +166,8 @@ const Game = {
 
                 this.goBigBurguer();
             } else if (this.maxBurguerSizeX <= this.player.height) {
-                this.gameOver();
-                alert("FRED IS DEAD");
+                this.winGame();
+
             }
         })
     },
@@ -184,9 +181,20 @@ const Game = {
     },
 
     gameOver: function () {
+      
+        document.querySelector("#canvas").style.display="none";
+        document.querySelector("#gameOver").style.display ="block";
         clearInterval(this.interval)
-    }
+    },
 
+    winGame: function () {
+      
+        document.querySelector("#canvas").style.display="none";
+        document.querySelector("#winGame").style.display ="block";
+        clearInterval(this.interval)
+    },
+
+    
 
 
 }
