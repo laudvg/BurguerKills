@@ -15,6 +15,7 @@ const Game = {
     obstacleGen: 0,
     prizeGen: 0,
     mySound: new Audio('./sound/WhatsAppAudio2019-11-06at110031P.mp3'),
+    // neonLamp: new Audio("./sound/70316__robinhood76__00996-neon-lamp-on-1.wav"),
 
 
     init: function () {
@@ -25,6 +26,7 @@ const Game = {
         this.canvas.width = this.width;
         this.canvas.height = this.height;
         this.start();
+        // this.neonLamp.play();
     },
 
     start: function () {
@@ -148,6 +150,7 @@ const Game = {
             } else if (this.minBurguerSizeX > this.player.width) {
                 this.gameOver();
                 this.mySound.pause();
+            
             }
         })
     },
@@ -173,6 +176,8 @@ const Game = {
             } else if (this.maxBurguerSizeX <= this.player.height) {
                 this.winGame();
                 this.mySound.pause();
+    
+
             }
         })
     },
