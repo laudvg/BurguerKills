@@ -9,5 +9,7 @@ Use the keys arrow up and arrow down to catch the junk food and keep growing :fr
 
 
 ### Details
+:computer: This was made using Canvas in Jvascript.
+:space_invader: Graphics made using Adobe Illustrator.
+:musical_note: music by [Ricardo Vivas](https://www.instagram.com/vivaricardo/). 
 
-:musical_note: music by [Ricardo Vivas](https://www.instagram.com/vivaricardo/) 
