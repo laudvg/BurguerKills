@@ -5,12 +5,12 @@ class Background {
         this.height = height;
 
         this.image = new Image();
-        this.image.src = './img/finalBack2x.png';
+        this.image.src = './img/fondo2x.png';
 
         this.posX = 0;
         this.posY = 0;
 
-        this.vx = 5;
+        this.vx = 3;
     };
 
     draw() {

@@ -5,16 +5,15 @@ class Player {
         this.height = height;
 
         this.image = new Image();
-        this.image.src = './img/burguerwlegs1.png'
-
-
+        this.image.src = './img/mesa12.png';
+        // this.image.src = './img/player.png'
         this.posX = 100;
         this.posY = 350;
         this.gameWidth = gameWidth;
         this.gameHeight = gameHeight;
 
-        this.frames = 3;
-        this.framesIndex = 0;
+        this.frames = 6;
+        this.framesIndex = 1;
 
         this.keyState = {
             keyDown: false,
@@ -38,9 +37,9 @@ class Player {
     }
 
     animate(framesCounter) {
-        if (framesCounter % 12 === 0) {
+        if (framesCounter % 10 === 0) {
             this.framesIndex++;
-            if (this.framesIndex > 2) this.framesIndex = 0;
+            (this.framesIndex > 5) && (this.framesIndex = 0);
         }
     }
 

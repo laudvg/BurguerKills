@@ -8,7 +8,7 @@ class Prizes {
       this.posY = gameHeight;
       this.posY = Math.floor((Math.random() * 450) + 75);
       this.image = new Image();
-      this.image.src = image ;
+      this.image.src = image;
       this.vx = vx;
     };
   

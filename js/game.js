@@ -51,7 +51,7 @@ const Game = {
 
     reset: function () {
         this.background = new Background(this.ctx, this.width, this.height);
-        this.player = new Player(this.ctx, 180, 175, this.width, this.height);
+        this.player = new Player(this.ctx, 180, 200, this.width, this.height);
         this.player.setListeners();
         Score.init(this.ctx, this.score);
         this.obstacles = [];
@@ -82,52 +82,56 @@ const Game = {
     },
 
     generateRandom: function () {
-        this.obstacleGen = Math.floor((Math.random() * 5) + 1);
+        this.obstacleGen = Math.floor((Math.random() * 6) + 1);
     },
 
     generateObstacles: function () {
         this.generateRandom();
 
         if (this.obstacleGen === 1) {
-            this.obstacles.push(new Obstacles(this.ctx, 40, 45, this.width, this.height, "./img/healthy/apple.png", 12));
+            this.obstacles.push(new Obstacles(this.ctx, 50, 55, this.width, this.height, "./img/healthy/healthApple.png", 15));
 
         } else if (this.obstacleGen === 2) {
-            this.obstacles.push(new Obstacles(this.ctx, 40, 45, this.width, this.height, "./img/healthy/berenjena.png",15));
+            this.obstacles.push(new Obstacles(this.ctx, 50, 70, this.width, this.height, "./img/healthy/healthAvo.png",15));
 
         } else if (this.obstacleGen === 3) {
-            this.obstacles.push(new Obstacles(this.ctx, 40, 45, this.width, this.height, "./img/healthy/carrot.png",20));
+            this.obstacles.push(new Obstacles(this.ctx, 50, 55, this.width, this.height, "./img/healthy/healthBan.png",15));
 
         } else if (this.obstacleGen === 4) {
-            this.obstacles.push(new Obstacles(this.ctx, 100, 45, this.width, this.height, "./img/healthy/patilla.png",10));
+            this.obstacles.push(new Obstacles(this.ctx, 50, 55, this.width, this.height, "./img/healthy/healthApple.png",10));
 
         } else if (this.obstacleGen === 5) {
-            this.obstacles.push(new Obstacles(this.ctx, 60, 45, this.width, this.height, "./img/healthy/kiwi.png",10));
+            this.obstacles.push(new Obstacles(this.ctx, 50, 70, this.width, this.height, "./img/healthy/healthAvo.png",10));
 
+        } else if (this.obstacleGen === 6) {
+            this.obstacles.push(new Obstacles(this.ctx, 50, 55, this.width, this.height, "./img/healthy/healthBan.png",10));
         }
     },
 
     generateRandomP: function () {
-        this.prizeGen = Math.floor((Math.random() * 5) + 1);
+        this.prizeGen = Math.floor((Math.random() * 6) + 1);
     },
 
     generatePrizes: function () {
         this.generateRandomP();
 
         if (this.prizeGen === 1) {
-            this.prizes.push(new Prizes(this.ctx, 70, 45, this.width, this.height, "./img/fat/taco.png",10));
+            this.prizes.push(new Prizes(this.ctx, 50, 55, this.width, this.height, "./img/fat/fatIce.png",15));
 
         } else if (this.prizeGen === 2) {
-            this.prizes.push(new Prizes(this.ctx, 60, 45, this.width, this.height, "./img/fat/donut.png",25));
+            this.prizes.push(new Prizes(this.ctx, 50, 55, this.width, this.height, "./img/fat/fatPotatoes.png",15));
 
         } else if (this.prizeGen === 3) {
-            this.prizes.push(new Prizes(this.ctx, 40, 45, this.width, this.height, "./img/fat/icecream.png",10));
+            this.prizes.push(new Prizes(this.ctx, 30, 70, this.width, this.height, "./img/fat/fatSoda.png",15));
 
         } else if (this.prizeGen === 4) {
-            this.prizes.push(new Prizes(this.ctx, 45, 45, this.width, this.height, "./img/fat/cola.png",20));
+            this.prizes.push(new Prizes(this.ctx, 50, 55, this.width, this.height, "./img/fat/fatIce.png",10));
 
         } else if (this.prizeGen === 5) {
-            this.prizes.push(new Prizes(this.ctx, 40, 50, this.width, this.height, "./img/fat/potatoes.png",12));
+            this.prizes.push(new Prizes(this.ctx, 50, 55, this.width, this.height, "./img/fat/fatPotatoes.png",10));
 
+        } else if (this.prizeGen === 6) {
+            this.prizes.push(new Prizes(this.ctx, 30, 70, this.width, this.height, "./img/fat/fatSoda.png",10));
         }
     },
 
@@ -191,20 +195,15 @@ const Game = {
     },
 
     gameOver: function () {
-      
         document.querySelector("#canvas").style.display="none";
         document.querySelector("#gameOver").style.display ="block";
         clearInterval(this.interval);
     },
 
     winGame: function () {
-      
         document.querySelector("#canvas").style.display="none";
         document.querySelector("#winGame").style.display ="block";
         clearInterval(this.interval);
     },
-
-    
-
 
 }
