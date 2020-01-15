@@ -7,7 +7,7 @@ Frank has a health issue. But we are not on his side.
 You’re a burger on his arteries trying to give him a stroke, keep eating junk food and avoid the vegetables.
 Use the keys arrow up and arrow down to catch the junk food and keep growing :fries:. Remember to avoid the healthy food! :apple:
 
-[](https://drive.google.com/open?id=1W5unGhVRcxyMegcxlqMrYnZo4u7LZOXE)
+Play the game [Here!](https://laudvg.github.io/BurguerKills/)
 
 ### Details
 :computer: This was made using Canvas in Jvascript.
